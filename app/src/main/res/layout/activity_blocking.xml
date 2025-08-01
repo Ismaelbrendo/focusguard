@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="#1C1C1E"
+                                                   tools:context=".BlockingActivity">
+
+    <!-- Ícone de bloqueio ou aviso -->
+    <!-- Usamos um ícone padrão do Android como placeholder.
+         @android:drawable/ic_lock_lock é um cadeado.
+         Você pode trocar por uma imagem sua depois. -->
+    <ImageView
+            android:id="@+id/icon_block"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginBottom="24dp"
+            android:src="@android:drawable/ic_lock_lock"
+            app:layout_constraintBottom_toTopOf="@id/text_title_blocked"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="#FFFFFF" />
+
+    <!-- Título principal da tela de bloqueio -->
+    <TextView
+            android:id="@+id/text_title_blocked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="APLICATIVO BLOQUEADO"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Mensagem de incentivo para o usuário -->
+    <TextView
+            android:id="@+id/text_subtitle_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="É hora de voltar ao foco."
+            android:textColor="#AEAEB2"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_title_blocked" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

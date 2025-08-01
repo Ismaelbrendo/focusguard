@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorGranted">#4CAF50</color> ```
+
+    ### Resumo das Melhorias
+
+    1.  **Verificação Completa:** O método `areAllPermissionsGranted()` agora verifica as 3 permissões essenciais. O app só vai para o dashboard quando todas estiverem ativas.
+    2.  **Atualização em `onResume`:** Toda vez que você volta para a tela de onboarding (depois de dar uma permissão, por exemplo), o método `onResume` é chamado. Ele agora verifica novamente o status de tudo. Se estiver tudo OK, ele avança. Se não, ele chama `updateButtonStates`.
+    3.  **Feedback Visual (`updateButtonStates`)**: Este novo método verifica cada permissão individualmente e, se ela estiver concedida, muda o texto do botão, adiciona um "✓", muda a cor de fundo para verde e o desativa, mostrando claramente ao usuário o que já foi feito.
+
+    Faça essas três alterações. Agora você terá um fluxo de onboarding robusto, claro e profissional.
+</resources>

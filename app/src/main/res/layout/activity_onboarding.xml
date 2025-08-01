@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="#1C1C1E"
+                                                   tools:context=".OnboardingActivity">
+
+    <TextView
+            android:id="@+id/title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:text="Permissões Necessárias"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/subtitle_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+            android:id="@+id/subtitle_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="64dp"
+            android:gravity="center"
+            android:text="Para funcionar corretamente, o FocusGuard precisa de algumas permissões especiais."
+            android:textColor="#AEAEB2"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/permissions_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+            android:id="@+id/permissions_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+                android:id="@+id/btn_permission_usage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. Permissão de Acesso ao Uso" />
+
+        <Button
+                android:id="@+id/btn_permission_accessibility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="2. Permissão de Acessibilidade" />
+
+        <Button
+                android:id="@+id/btn_permission_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="3. Permissão de Sobreposição" />
+
+        <Button
+                android:id="@+id/btn_permission_battery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="4. Otimização de Bateria (Opcional)" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
