@@ -75,7 +75,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="4. Otimização de Bateria (Opcional)" />
+                android:text="4. Otimização de Bateria" />
+
+        <Button
+                android:id="@+id/btn_permission_autostart_miui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Permissão Especial (Xiaomi)"
+                android:visibility="gone" />
 
     </LinearLayout>
 

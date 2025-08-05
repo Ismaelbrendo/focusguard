@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="24dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+        <ImageView
+                android:id="@+id/dialog_app_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/ic_launcher" />
+
+        <TextView
+                android:id="@+id/dialog_app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Nome do App"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="?android:attr/listDivider" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo de Bloqueio"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+    <RadioGroup
+            android:id="@+id/radiogroup_block_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RadioButton
+                android:id="@+id/radio_always"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sempre Bloqueado" />
+
+        <RadioButton
+                android:id="@+id/radio_schedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bloquear por Horário" />
+
+        <RadioButton
+                android:id="@+id/radio_usage_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bloquear por Limite de Uso" />
+
+    </RadioGroup>
+
+    <LinearLayout
+            android:id="@+id/schedule_options_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"> <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Definir Horário"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <EditText
+                    android:id="@+id/edit_text_start_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Início (ex: 22:00)" />
+
+            <EditText
+                    android:id="@+id/edit_text_end_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:hint="Fim (ex: 08:00)" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/usage_limit_options_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"> <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Definir Limite de Tempo Diário"
+            android:textStyle="bold"/>
+        <EditText
+                android:id="@+id/edit_text_time_limit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tempo em minutos"
+                android:inputType="number"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="end">
+
+        <Button
+                android:id="@+id/btn_remove_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remover"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="@android:color/holo_red_dark"/>
+
+        <Button
+                android:id="@+id/btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Salvar"/>
+    </LinearLayout>
+
+</LinearLayout>

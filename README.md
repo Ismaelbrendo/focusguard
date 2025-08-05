@@ -21,7 +21,7 @@ FocusGuard é um aplicativo Android moderno e leve, desenvolvido em **Java**, qu
 ### 1. Clone o projeto
 
 ```bash
-git clone https://github.com/seu-usuario/focusguard.git
+git clone https://github.com/ismaelbrendo/focusguard.git
 cd focusguard
 ```
 
@@ -126,6 +126,6 @@ FocusGuard/
 
 ## 💬 Contato
 
-Desenvolvido por **Seu Nome** — [@seu_usuario](https://github.com/seu_usuario)
+Desenvolvido por **Ismael Brendo** — [@ismaelbrendo](https://github.com/seu_usuario)
 
 ---

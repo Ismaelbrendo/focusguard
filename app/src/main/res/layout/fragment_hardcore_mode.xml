@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="16dp"
+              android:gravity="center">
+
+    <TextView
+            android:id="@+id/text_hardcore_explanation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="O Modo Hardcore impede a desinstalação do FocusGuard. Para desativar, você precisará primeiro remover a permissão de Administrador do Dispositivo nas configurações de segurança do seu celular."
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:layout_marginBottom="32dp"/>
+
+    <Button
+            android:id="@+id/btn_activate_hardcore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ativar Modo Hardcore"/>
+
+</LinearLayout>

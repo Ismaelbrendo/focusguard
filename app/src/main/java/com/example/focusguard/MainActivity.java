@@ -1,5 +1,6 @@
 package com.example.focusguard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
@@ -16,62 +17,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // A chamada a super.onCreate() deve ser a primeira linha.
         super.onCreate(savedInstanceState);
+
+        // A nossa lógica de verificação de permissões vem depois.
+        if (!PermissionChecker.areAllPermissionsGranted(this)) {
+            Intent intent = new Intent(this, OnboardingActivity.class);
+            startActivity(intent);
+            finish();
+            return; // Impede que o resto do código seja executado
+        }
+
+        // Agora, o resto do código pode ser executado com segurança.
         setContentView(R.layout.activity_main);
 
-        // --- Configuração da Toolbar ---
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar); // Define nossa toolbar como a action bar principal
+        setSupportActionBar(toolbar);
 
-        // --- Configuração do Navigation Drawer ---
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this); // Define que esta classe vai "ouvir" os cliques no menu
+        navigationView.setNavigationItemSelectedListener(this);
 
-        // Este é o "motor" que conecta a toolbar com o drawer layout.
-        // Ele cria o ícone "hambúrguer" (☰) e gerencia a animação de abrir/fechar.
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
-        toggle.syncState(); // Sincroniza o estado do ícone com o drawer
+        toggle.syncState();
 
-        // --- Carregar o Fragment Inicial ---
-        // Se o app está sendo iniciado pela primeira vez (e não recriado),
-        // carregamos o fragment do dashboard como tela inicial.
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_dashboard); // Deixa o item do menu selecionado
+            navigationView.setCheckedItem(R.id.nav_dashboard);
         }
     }
 
-    // --- Lógica para o Clique nos Itens do Menu ---
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Pegamos o ID do item clicado
         int itemId = item.getItemId();
 
-        // Usamos if-else if em vez de switch para evitar o erro de compilação
         if (itemId == R.id.nav_dashboard) {
-            // Se clicou em "Dashboard", carrega o DashboardFragment
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
         } else if (itemId == R.id.nav_blocking) {
-            // Se clicou em "Bloquear", carrega o BlockingFragment
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new BlockingFragment()).commit();
+        } else if (itemId == R.id.nav_hardcore) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HardcoreModeFragment()).commit();
+        } else if (itemId == R.id.nav_site_blocking) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SiteBlockingFragment()).commit();
         }
 
-        // Fecha o menu lateral após o clique
+        item.setChecked(true);
         drawerLayout.closeDrawer(GravityCompat.START);
-        return true; // Retorna 'true' para indicar que o clique foi tratado
+        return true;
     }
 
-    // --- Lógica para o Botão "Voltar" ---
     @Override
     public void onBackPressed() {
-        // Se o menu lateral estiver aberto, o botão "voltar" deve apenas fechá-lo.
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            // Se o menu estiver fechado, o botão "voltar" funciona normalmente.
             super.onBackPressed();
         }
     }

@@ -8,24 +8,43 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.HashSet;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 public class BlockingAdapter extends RecyclerView.Adapter<BlockingAdapter.ViewHolder> {
 
     private final List<AppInfo> appList;
     private final SharedPreferences sharedPreferences;
-    private final Set<String> blockedApps;
+    private final List<BlockingRule> rules;
+    private OnAppClickListener clickListener;
+
+    public interface OnAppClickListener {
+        void onAppClicked(AppInfo app);
+    }
+
+    public void setOnAppClickListener(OnAppClickListener listener) {
+        this.clickListener = listener;
+    }
 
     public BlockingAdapter(List<AppInfo> appList, Context context) {
         this.appList = appList;
-        // Acessa o arquivo de SharedPreferences para salvar/ler a lista de bloqueio
         this.sharedPreferences = context.getSharedPreferences("BlockedApps", Context.MODE_PRIVATE);
-        // Carrega a lista de apps bloqueados já salva
-        this.blockedApps = new HashSet<>(sharedPreferences.getStringSet("blacklist", new HashSet<>()));
+
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("rules_list", null);
+
+        if (json != null) {
+            Type type = new TypeToken<ArrayList<BlockingRule>>() {}.getType();
+            this.rules = gson.fromJson(json, type);
+        } else {
+            this.rules = new ArrayList<>();
+        }
     }
 
     @NonNull
@@ -42,20 +61,17 @@ public class BlockingAdapter extends RecyclerView.Adapter<BlockingAdapter.ViewHo
         holder.appName.setText(currentApp.getAppName());
         holder.appIcon.setImageDrawable(currentApp.getIcon());
 
-        // Define o estado inicial do switch baseado na lista salva
-        holder.blockSwitch.setChecked(blockedApps.contains(currentApp.getPackageName()));
+        // MUDANÇA: Adiciona o feedback visual
+        if (doesRuleExist(currentApp.getPackageName())) {
+            holder.itemView.setAlpha(0.5f); // Deixa o item com 50% de transparência
+        } else {
+            holder.itemView.setAlpha(1.0f); // Garante a aparência normal
+        }
 
-        // Adiciona um "ouvinte" para quando o switch for alterado
-        holder.blockSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                // Se o switch foi ligado, adiciona o pacote à lista
-                blockedApps.add(currentApp.getPackageName());
-            } else {
-                // Se foi desligado, remove o pacote
-                blockedApps.remove(currentApp.getPackageName());
+        holder.itemView.setOnClickListener(v -> {
+            if (clickListener != null) {
+                clickListener.onAppClicked(currentApp);
             }
-            // Salva a lista atualizada no SharedPreferences
-            saveBlockedApps();
         });
     }
 
@@ -64,22 +80,51 @@ public class BlockingAdapter extends RecyclerView.Adapter<BlockingAdapter.ViewHo
         return appList.size();
     }
 
-    private void saveBlockedApps() {
+    private void saveRules() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putStringSet("blacklist", blockedApps);
+        Gson gson = new Gson();
+        String json = gson.toJson(rules);
+        editor.putString("rules_list", json);
         editor.apply();
+    }
+
+    private boolean doesRuleExist(String packageName) {
+        for (BlockingRule rule : rules) {
+            if (rule.getPackageName().equals(packageName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addOrUpdateRule(BlockingRule newRule) {
+        removeRule(newRule.getPackageName());
+        rules.add(newRule);
+        saveRules();
+    }
+
+    public void removeRule(String packageName) {
+        Iterator<BlockingRule> iterator = rules.iterator();
+        while (iterator.hasNext()) {
+            BlockingRule rule = iterator.next();
+            if (rule.getPackageName().equals(packageName)) {
+                iterator.remove();
+                saveRules();
+                break;
+            }
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView appIcon;
         TextView appName;
-        SwitchCompat blockSwitch;
+        // MUDANÇA: SwitchCompat removido daqui
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             appIcon = itemView.findViewById(R.id.app_icon_blocking);
             appName = itemView.findViewById(R.id.app_name_blocking);
-            blockSwitch = itemView.findViewById(R.id.block_switch);
+            // MUDANÇA: e daqui
         }
     }
 }

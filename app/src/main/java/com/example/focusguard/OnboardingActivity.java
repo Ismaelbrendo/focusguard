@@ -1,26 +1,25 @@
 package com.example.focusguard;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log; // Importante adicionar o Log
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 public class OnboardingActivity extends AppCompatActivity {
 
-    private Button usageButton;
-    private Button accessibilityButton;
-    private Button overlayButton;
-    private Button batteryButton;
+    private Button usageButton, accessibilityButton, overlayButton, batteryButton, miuiButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // A verificação inicial continua aqui.
-        if (areAllPermissionsGranted()) {
+        if (PermissionChecker.areAllPermissionsGranted(this)) {
             goToMainActivity();
             return;
         }
@@ -31,41 +30,43 @@ public class OnboardingActivity extends AppCompatActivity {
         accessibilityButton = findViewById(R.id.btn_permission_accessibility);
         overlayButton = findViewById(R.id.btn_permission_overlay);
         batteryButton = findViewById(R.id.btn_permission_battery);
+        miuiButton = findViewById(R.id.btn_permission_autostart_miui); // Novo botão
+
+        // Mostra o botão da MIUI apenas se o dispositivo for da Xiaomi
+        if ("xiaomi".equalsIgnoreCase(Build.MANUFACTURER)) {
+            miuiButton.setVisibility(View.VISIBLE);
+        }
 
         usageButton.setOnClickListener(v -> PermissionChecker.requestUsageStatsPermission(this));
         accessibilityButton.setOnClickListener(v -> startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)));
         overlayButton.setOnClickListener(v -> PermissionChecker.requestDrawOverlaysPermission(this));
         batteryButton.setOnClickListener(v -> PermissionChecker.requestIgnoreBatteryOptimizations(this));
+        miuiButton.setOnClickListener(v -> PermissionChecker.requestMIUIAutostartPermission(this));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // A lógica principal agora acontece aqui.
-        // Primeiro, atualizamos a aparência dos botões com base no status atual.
         updateButtonStates();
 
-        // DEPOIS, verificamos se TUDO foi concedido para então avançar.
-        if (areAllPermissionsGranted()) {
+        if (PermissionChecker.areAllPermissionsGranted(this)) {
             goToMainActivity();
         }
     }
 
     private void updateButtonStates() {
-        // --- Botão de Acesso ao Uso ---
         if (PermissionChecker.hasUsageStatsPermission(this)) {
             setButtonGranted(usageButton, "1. Acesso ao Uso Concedido");
         }
-
-        // --- Botão de Acessibilidade ---
         if (PermissionChecker.isAccessibilityServiceEnabled(this, Accessibility.class)) {
             setButtonGranted(accessibilityButton, "2. Acessibilidade Concedida");
         }
-
-        // --- Botão de Sobreposição ---
         if (PermissionChecker.canDrawOverlays(this)) {
             setButtonGranted(overlayButton, "3. Sobreposição Concedida");
+        }
+        // MUDANÇA: A verificação de bateria agora também atualiza o botão
+        if (PermissionChecker.isIgnoringBatteryOptimizations(this)) {
+            setButtonGranted(batteryButton, "4. Bateria Sem Restrições");
         }
     }
 
@@ -75,19 +76,6 @@ public class OnboardingActivity extends AppCompatActivity {
         button.setEnabled(false);
     }
 
-    private boolean areAllPermissionsGranted() {
-        // Separamos cada verificação em uma variável para o log.
-        boolean usageGranted = PermissionChecker.hasUsageStatsPermission(this);
-        boolean accessibilityGranted = PermissionChecker.isAccessibilityServiceEnabled(this, Accessibility.class);
-        boolean overlayGranted = PermissionChecker.canDrawOverlays(this);
-
-        // --- LOG DE DIAGNÓSTICO ---
-        // Esta linha nos dirá no Logcat o status de cada permissão.
-        Log.d("OnboardingCheck", "Status das Permissões -> Uso: " + usageGranted + ", Acessibilidade: " + accessibilityGranted + ", Sobreposição: " + overlayGranted);
-
-        // A condição final permanece a mesma, mas agora podemos ver os valores individuais.
-        return usageGranted && accessibilityGranted && overlayGranted;
-    }
 
     private void goToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
