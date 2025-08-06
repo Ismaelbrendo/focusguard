@@ -13,7 +13,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.*;
-
+//TODO: ELIMINAR COMENTARIOS DE IA E COMENTAR POR CONTA PROPRIA
 public class Accessibility extends AccessibilityService {
     // Em Accessibility.java
     private static final String NOTIFICATION_CHANNEL_ID = "FocusGuardServiceChannel";
@@ -138,6 +138,7 @@ public class Accessibility extends AccessibilityService {
                     return;
                 }
                 // TODO: Lógica para outros tipos de bloqueio
+                // TODO: BLOQUEIO DE SITES
             }
         }
 
