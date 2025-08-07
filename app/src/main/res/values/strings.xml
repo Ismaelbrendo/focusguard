@@ -1,6 +1,16 @@
 <resources>
+    //--------------------ONBOARDING---------------------------------
+    <string name="welcome">Welcome to Focus Guard</string>
+    <string name="subtitle_welcome">Regain control over\n your screen time.</string>
+    <string name="button_lets_do_it">Let's do it</string>
+    <string name="login_button">Already member?</string>
+    <string name="privacy_and_condicions">By processing, you agree to our Privacy Policy and Conditions of Use</string>
+
+
+    
     <string name="app_name">Focus Guard</string>
     <string name="accessibility_service_description"/>
     <string name="navigation_drawer_open">Abrir menu de navegação</string>
     <string name="navigation_drawer_close">Fechar menu de navegação</string>
+    
 </resources>
