@@ -1,12 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.FocusGuard" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">#3e98ff</item>
+    <style name="Base.Theme.FocusGuard" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="colorPrimary">#3FA1FE</item>
+        <item name="colorPrimaryVariant">#3FA1FE</item>
+        <item name="colorSecondary">#3FA1FE</item>
         <item name="colorOnPrimary">@color/white</item>
 
+        <!-- Barra de status -->
+        <item name="android:statusBarColor">#3FA1FE</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Barra de navegação -->
+        <item name="android:navigationBarColor">#3FA1FE</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
+
 
     <style name="Theme.FocusGuard" parent="Base.Theme.FocusGuard"/>
 </resources>

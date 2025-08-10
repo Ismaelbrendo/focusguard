@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <style name="Base.Theme.FocusGuard" parent="Theme.Material3.DayNight.NoActionBar">
+                <item name="colorPrimary">#3FA1FE</item>
+                <item name="colorOnPrimary">@color/white</item>
+                <item name="colorPrimaryContainer">#3FA1FE</item>
+                <item name="colorOnPrimaryContainer">@color/white</item>
+                <item name="colorSecondary">#3FA1FE</item>
+                <item name="colorOnSecondary">@color/white</item>
+                <item name="colorSecondaryContainer">#3FA1FE</item>
+                <item name="colorOnSecondaryContainer">@color/white</item>
+                <item name="colorTertiary">#3FA1FE</item>
+                <item name="colorOnTertiary">@color/white</item>
+                <item name="colorTertiaryContainer">#3FA1FE</item>
+                <item name="colorOnTertiaryContainer">@color/white</item>
+                <item name="colorError">#FF4444</item>
+                <item name="colorOnError">@color/white</item>
+                <item name="colorErrorContainer">#FF4444</item>
+                <item name="colorOnErrorContainer">@color/white</item>
+                <item name="colorOnBackground">#000000</item>
+                <item name="colorSurface">@color/white</item>
+                <item name="colorOnSurface">#000000</item>
+                <item name="colorSurfaceVariant">#E0F2FF</item>
+                <item name="colorOnSurfaceVariant">#000000</item>
+                <item name="android:statusBarColor">#3FA1FE</item>
+                <item name="android:windowLightStatusBar">false</item>
+                <item name="android:navigationBarColor">#3FA1FE</item>
+                <item name="android:windowLightNavigationBar">false</item>
+
+        </style>
+
+
+
+</resources>

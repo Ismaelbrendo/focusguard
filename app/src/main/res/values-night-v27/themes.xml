@@ -1,5 +1,5 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <style name="Base.Theme.FocusGuard" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">#3FA1FE</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -22,10 +22,11 @@
         <item name="colorOnSurface">#000000</item>
         <item name="colorSurfaceVariant">#E0F2FF</item>
         <item name="colorOnSurfaceVariant">#000000</item>
-        <item name="android:statusBarColor">#051C30</item>
+        <item name="android:statusBarColor">#3FA1FE</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:navigationBarColor">#133456</item>
+        <item name="android:navigationBarColor">#3FA1FE</item>
         <item name="android:windowLightNavigationBar">false</item>
 
     </style>
+
 </resources>

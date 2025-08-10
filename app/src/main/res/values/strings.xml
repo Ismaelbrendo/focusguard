@@ -2,7 +2,7 @@
     //--------------------ONBOARDING---------------------------------
     <string name="welcome">Welcome to Focus Guard</string>
     <string name="subtitle_welcome">Regain control over\n your screen time.</string>
-    <string name="button_lets_do_it">Let's do it</string>
+    <string name="button_lets_do_it">Lets do it</string>
     <string name="login_button">Already member?</string>
     <string name="privacy_and_condicions">By processing, you agree to our Privacy Policy and Conditions of Use</string>
 
